@@ -1,0 +1,66 @@
+services:
+  mariadb:
+    pull_policy: never
+    build:
+      context: requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    env_file: .env
+    restart: always
+    networks:
+      - inception
+    expose:
+      - "3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+
+  wordpress:
+    pull_policy: never
+    build:
+      context: requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    env_file: .env
+    restart: always
+    depends_on:
+      - mariadb
+    expose:
+      - "9000"
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www/wordpress
+
+  nginx:
+    pull_policy: never
+    build:
+      context: requirements/nginx
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/wordpress
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/brioche/data/wordpress'
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/brioche/data/mariadb'
+networks:
+  inception:
+    driver: bridge
+
