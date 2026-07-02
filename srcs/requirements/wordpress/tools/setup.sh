@@ -4,7 +4,8 @@ set -e
 
 cd /var/www/wordpress
 
-until mariadb -hmariadb -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" -e "SELECT 1" >/dev/null 2>&1; do
+until mariadb -hmariadb -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" -e "SELECT 1"; do
+    echo "waiting for database..."
     sleep 2;
 done
 
