@@ -1,6 +1,6 @@
 NAME = inception
 COMPOSE = docker compose -f srcs/docker-compose.yml
-DATA_DIR = /home/brioche/data
+DATA_DIR = /home/brcoppie/data
 
 all: up
 
