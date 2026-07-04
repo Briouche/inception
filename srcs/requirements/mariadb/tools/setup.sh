@@ -7,7 +7,7 @@ chown -R mysql:mysql /run/mysqld /var/lib/mysql
 chmod 750 /var/lib/mysql
 
 if [ ! -f "/var/lib/mysql/.initialized" ]; then
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql --basedir=/usr
 
     mysqld --user=mysql --bootstrap << EOF
 USE mysql;

@@ -1,7 +1,12 @@
-FROM debian:13
-RUN apt update -y && \
-    apt-get install mariadb-server -y
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+FROM alpine:3.24
+
+RUN apk add --no-cache \
+    bash \
+    mariadb \
+    mariadb-client && \
+    sed -i 's/skip-networking//' /etc/my.cnf.d/mariadb-server.cnf
+
+COPY conf/50-server.cnf /etc/my.cnf.d/50-server.cnf
 COPY tools/setup.sh /setup.sh
 RUN chmod +x /setup.sh
 

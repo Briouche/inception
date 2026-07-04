@@ -38,4 +38,4 @@ fi
 
 chown -R www-data:www-data /var/www/wordpress
 
-exec php-fpm8.4 -F
+exec php-fpm84 -F
