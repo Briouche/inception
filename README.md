@@ -24,6 +24,9 @@ docker network vs host network:
 
 Use make up for launching, make down to delete containers. make fclean to delete mounted volumes and images too. For more makefile commands look in User_doc.
 
+Add a .env file (see User_doc) before building. 
+Once built go to https://localhost:443/ to view the wordpress website.
+
 ## **Resources**
 
 learning docker with official hub - https://www.docker.com/get-started/
